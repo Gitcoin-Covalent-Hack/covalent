@@ -1,9 +1,28 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import axios from "axios";
+
 
 export default function Home() {
-  return (
+  const [add, setAdd] = useState({});
+
+
+  useEffect(() => {
+    handleAddress();
+  }, []);
+
+  const handleAddress = async () => {
+    const resp = await axios.get(
+      `https://api.covalenthttps://api.covalenthq.com/v1/1/address/${address}/balances_v2/?quote-currency=USD&format=JSON`,
+      { auth: { username: "ckey_6bf60a7bf22d4a309dbe74f3c5c" } },
+    );
+    setAdd(resp.data.data.address !== null ? resp.data.data : null );
+    
+  };
+  console.log("the response" + " "+ add?.address)
+
+ return (
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
