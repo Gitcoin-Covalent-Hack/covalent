@@ -7,9 +7,12 @@ import { useState, useEffect } from 'react';
 export default function Home() {
   const [add, setAdd] = useState([]);
   const [address, setAddress] = useState()
-
+  const [txn, setTxn] = useState();
+  const [portfolio, setPortfolio] = useState([]);
+  const [chains, setChains] = useState([]);
+  
  
-
+console.log(process.env)
 
   // useEffect(() => {
   //   handleAddress();
@@ -23,7 +26,31 @@ export default function Home() {
     setAdd(resp.data.data.address !== null ? resp.data.data.items : null );
     
   };
-  
+  const handleTxn = async () => {
+    const resp = await axios.get(
+      `https://api.covalenthq.com/v1/1/address/${address}/transactions_v2/`,
+      { auth: { username: "ckey_13efa795783c4edd9b5991290d7" } },
+    );
+    setTxn(resp.data.data.address !== null ? resp.data.data.items : null );
+    
+  };
+  const handlePortfolio = async () => {
+    const resp = await axios.get(
+      `https://api.covalenthq.com/v1/1/address/${address}/portfolio_v2/`,
+      { auth: { username: "ckey_13efa795783c4edd9b5991290d7" } },
+    );
+    setPortfolio(resp.data.data.address !== null ? resp.data.data.items : null );
+    
+  };
+  const handleChains = async () => {
+    const resp = await axios.get(
+      `https://api.covalenthq.com/v1/chains/`,
+      { auth: { username: "ckey_13efa795783c4edd9b5991290d7" } },
+    );
+    setChains(resp.data.data.updated_at !== null ? resp.data.data.items : null );
+    
+  };
+ 
 
  return (
     <div className={styles.container}>
@@ -35,6 +62,18 @@ export default function Home() {
   <div className={styles.footer}>
         <input onChange={(e) => setAddress(e.target.value)}></input>
         <button onClick={handleAddress}>Get Tokens</button>
+        <button onClick={handleTxn}>Get Transactions</button>
+        <button onClick={handlePortfolio}>Chart data</button>
+        <button onClick={handleChains}>All Chains</button>
+        </div>
+        <div className={styles.custom}>
+        {chains?.map((items, address )=> (
+          <div className={styles.grid} key={items.address}>
+            <h3>{items.label}</h3>
+          <div> Chain Id: {items.chain_id} </div>
+          <image src={items.logo_url}></image>
+          </div>
+        ))}
         </div>
         <div className={styles.custom}>
         {add?.map((items, address )=> (
@@ -44,10 +83,32 @@ export default function Home() {
           <p>Quote Rate:{items.quote_rate}</p>
           <p>Quote Rate(Day):{items.quote_rate_24h}</p>
           <p> Worth in USD: {items.quote}</p>
-          <Image height={5} width={5} alt='logo' src={items.logo_url}></Image>
+          <image src={items.logo_url}></image>
           </div>
         ))}
         </div>
+        {portfolio?.map((items, address )=> (
+          <div className={styles.grid} key={items.address}>
+           {items.holdings.map((time) => (
+            <>
+            <p key={time.contract_name}>{time.timestamp}</p>
+            <p key={time.contract_name}>{time.high.balance}</p>
+            </>
+           ))},
+           </div>
+        ))}
+
+
+        {txn?.map((items, address )=> (
+          <div className={styles.grid} key={items.address}>
+            <h5>{items.tx_hash}</h5>
+          <div> To: {items.to_address}</div>
+          <p>Fees Paid:{items.gas_quote}</p>
+          
+          <p> Gas Spent: {items.gas_spent}</p>
+          <p>Block signed at: {items.block_signed_at}</p>
+          </div>
+        ))}
       
     </div>
   )
