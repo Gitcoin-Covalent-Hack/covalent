@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Link from 'next/Link'
 import styles from '../styles/Home.module.css'
 import axios from "axios";
 import { useState, useEffect } from 'react';
@@ -10,6 +10,7 @@ export default function Home() {
   const [txn, setTxn] = useState();
   const [portfolio, setPortfolio] = useState([]);
   const [chains, setChains] = useState([]);
+  
   
  
 console.log(process.env)
@@ -66,11 +67,13 @@ console.log(process.env)
         <button onClick={handlePortfolio}>Chart data</button>
         <button onClick={handleChains}>All Chains</button>
         </div>
+        <Link href={'/chart'}>chart works</Link>
         <div className={styles.custom}>
         {chains?.map((items, address )=> (
           <div className={styles.grid} key={items.address}>
             <h3>{items.label}</h3>
           <div> Chain Id: {items.chain_id} </div>
+          <div> {items.is_testnet == true? "TESTNET" : null } </div>
           <image src={items.logo_url}></image>
           </div>
         ))}
