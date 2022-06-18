@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Gasdata from "../components/Gasdata";
 export default function GasCalculator() {
   const [address, setaddress] = useState("");
@@ -6,7 +6,6 @@ export default function GasCalculator() {
   const [isLoading, setLoading] = useState(false);
   const [nooftx, setnooftx] = useState(null);
 
-  let val;
   const getdata = async (client) => {
     setLoading(true);
     fetch(
@@ -47,12 +46,7 @@ export default function GasCalculator() {
       {isLoading ? <p>Loading...</p> : null}
 
       {!isLoading && data && (
-        <div>
-          {/* {data?.data?.items.map((item) => {
-            return <Gasdata data={item} address={address} />;
-          })} */}
-          {<Gasdata data={data} address={address} />}
-        </div>
+        <div>{<Gasdata data={data} address={address} />}</div>
       )}
     </>
   );
