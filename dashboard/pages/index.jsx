@@ -19,9 +19,7 @@ export default function Home() {
 
   const fetchAllChains = async () => {
     let response = await API.get(`/chains/status/?&key=${COVALENT_KEY}`);
-    console.log("chainItems: ", response.data);
     let chainItems = response.data.data.items;
-    console.log("chainItems: ", chainItems);
     setChainItemsData(chainItems);
   };
 
