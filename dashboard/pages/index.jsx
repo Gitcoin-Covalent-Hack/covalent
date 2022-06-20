@@ -55,10 +55,6 @@ export default function Home() {
         <h1 className="font-bold">All Chains</h1>
       </div>
       <ChainDetails chainItems={chainItemsData} />
-
-      <Link href="/GasCalculator">
-        <a style={{ fontSize: 40, color: "cyan", border: "2px solid black", padding: 10 }}>Gas Guzzler</a>
-      </Link>
     </div>
   );
 }
