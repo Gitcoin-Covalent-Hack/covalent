@@ -1,0 +1,34 @@
+### naim
+# @address = 0x813f45BD0B48a334A3cc06bCEf1c44AAd907b8c1
+## demo.eth
+# @address = 0x3883f5e181fccaf8410fa61e12b59bad963fb645  
+@address = atg.eth  
+@chainId =1 
+
+@covalentKey = ckey_5e8a670491ce4380b6c994069e8
+
+#### GET BALANCES
+GET https://api.covalenthq.com/v1/1/address/{{address}}/balances_v2/?&key=ckey_5e8a670491ce4380b6c994069e8 HTTP/1.1
+
+
+
+#### HISTORICAL PORTFOLIO VALUE 
+GET https://api.covalenthq.com/v1/{{chainId}}/address/{{address}}/portfolio_v2/?&key=ckey_5e8a670491ce4380b6c994069e8 HTTP/1.1
+
+
+
+#### ERC20 TOKEN TRANSFER
+
+GET https://api.covalenthq.com/v1/{{chainId}}/address/{{address}}/transfers_v2/?&key=ckey_5e8a670491ce4380b6c994069e8&quote-currency=USD&format=JSON&contract-address=0x4dc3643dbc642b72c158e7f3d2ff232df61cb6ce
+
+#### all chains data
+GET https://api.covalenthq.com/v1/chains/?&key=ckey_5e8a670491ce4380b6c994069e8
+
+
+#### all chains status
+GET https://api.covalenthq.com/v1/chains/status/?&key={{covalentKey}}
+
+
+
+#### get transcactions
+GET https://api.covalenthq.com/v1/1/address/{{address}}/transactions_v2/?key={{covalentKey}}&page-size=1&page-number=1
