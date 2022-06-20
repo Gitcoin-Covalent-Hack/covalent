@@ -11,7 +11,7 @@ export default function Chart() {
   return (
     <div style={{ minHeight: "1000px" }}>
       <h1>Coin Price Chart</h1>
-      {/* <CoinPriceChart /> */}
+      <CoinPriceChart />
     </div>
   );
 }
