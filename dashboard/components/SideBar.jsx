@@ -17,7 +17,7 @@ const SideBar = () => {
   const { pathname } = useRouter();
   return (
     <>
-      <div className="flex flex-col w-64 h-screen px-4 py-8  border-r dark:bg-gray-800 dark:border-gray-600 ">
+      <div className="h-screen sticky top-0 px-4 py-8  border-r dark:bg-gray-800 dark:border-gray-600 ">
         <h2 className="text-3xl font-semibold text-primary">Covalent</h2>
 
         <div className="relative mt-6">

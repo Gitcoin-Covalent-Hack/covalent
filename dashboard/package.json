@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel:deploy":"vercel deploy"
+    "vercel:deploy": "vercel deploy"
   },
   "dependencies": {
     "@syncfusion/ej2-base": "^20.1.60",
@@ -17,6 +17,7 @@
     "axios": "^0.27.2",
     "daisyui": "^2.15.4",
     "dotenv": "^16.0.1",
+    "lightweight-charts": "^3.8.0",
     "moment": "^2.29.3",
     "next": "12.1.6",
     "next-themes": "^0.2.0",
