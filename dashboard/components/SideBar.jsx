@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import React from "react";
 
 import { AiOutlineAreaChart, AiOutlineHome, AiOutlinePieChart } from "react-icons/ai";
 import { BiLineChart } from "react-icons/bi";
@@ -40,13 +41,12 @@ const SideBar = () => {
         <div className="flex flex-col justify-between flex-1 mt-6">
           <nav>
             {routes.map((tab) => (
-              <>
+              <React.Fragment key={tab.pageName}>
                 <Link href={tab.pageName}>
                   <a
                     className={`flex items-center px-4 mt-2 py-2   rounded-md 
-		  ${pathname === tab.pageName ? "bg-primary text-primary-content" : ""}
-		 
-		 `}
+                                ${pathname === tab.pageName ? "bg-primary text-primary-content" : ""}
+		                          `}
                     href="#">
                     <div className="flex w-full">
                       <span className="mx-1">{tab.icon}</span>
@@ -54,7 +54,7 @@ const SideBar = () => {
                     </div>
                   </a>
                 </Link>
-              </>
+              </React.Fragment>
             ))}
           </nav>
         </div>
