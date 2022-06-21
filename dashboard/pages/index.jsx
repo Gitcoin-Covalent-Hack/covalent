@@ -56,3 +56,12 @@ export default function Home() {
     </div>
   );
 }
+
+// export async function getServerSideProps() {
+//   console.log("ENVS", process.env);
+//   return {
+//     props: {
+//       data: "cool",
+//     },
+//   };
+// }
