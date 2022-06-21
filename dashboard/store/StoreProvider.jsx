@@ -1,4 +1,5 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useEffect, useReducer } from "react";
+import { useAccount } from "wagmi";
 
 const initialState = { address: "" };
 
@@ -19,6 +20,9 @@ const StoreProvider = ({ children }) => {
    * eg: dispatch({ payload: { address: "cool" } }
    * to access the state use   const [state, dispatch] = useStore(); in component
    * ---------------------*/
+  // const { data } = useAccount();
+  // console.log("data: ", data.address);
+  // useEffect(() => {}, []);
 
   return <StoreContext.Provider value={[state, dispatch]}>{children}</StoreContext.Provider>;
 };

@@ -10,6 +10,7 @@
     "vercel:deploy": "vercel deploy"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^0.3.3",
     "@syncfusion/ej2-base": "^20.1.60",
     "@syncfusion/ej2-react-charts": "^20.1.59",
     "@tailwindcss/forms": "^0.5.2",
@@ -17,13 +18,15 @@
     "axios": "^0.27.2",
     "daisyui": "^2.15.4",
     "dotenv": "^16.0.1",
+    "ethers": "^5.6.9",
     "lightweight-charts": "^3.8.0",
     "moment": "^2.29.3",
     "next": "12.1.6",
     "next-themes": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "wagmi": "^0.4.12"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
