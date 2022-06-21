@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import React from "react";
 
 import { AiOutlineAreaChart, AiOutlineHome, AiOutlinePieChart } from "react-icons/ai";
-import { BiLineChart } from "react-icons/bi";
+import { BiLineChart, BiGasPump } from "react-icons/bi";
 
 const routes = [
   { tabName: "Home", pageName: "/", icon: <AiOutlineHome /> },
   { tabName: "Charts", pageName: "/Charts", icon: <AiOutlineAreaChart /> },
+  { tabName: "Gas Guzzler", pageName: "/GasCalculator", icon: <BiGasPump /> },
   { tabName: "Analysis", pageName: "/Analysis", icon: <AiOutlinePieChart /> },
   { tabName: "Transcactions", pageName: "/Transcactions", icon: <BiLineChart /> },
 ];
@@ -16,7 +17,7 @@ const SideBar = () => {
   const { pathname } = useRouter();
   return (
     <>
-      <div className="flex flex-col w-64 h-screen px-4 py-8  border-r dark:bg-gray-800 dark:border-gray-600 ">
+      <div className="h-screen sticky top-0 px-4 py-8  border-r dark:bg-gray-800 dark:border-gray-600 ">
         <h2 className="text-3xl font-semibold text-primary">Covalent</h2>
 
         <div className="relative mt-6">

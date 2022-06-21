@@ -1,10 +1,10 @@
-
 import { useEffect, useState } from "react";
 import { COVALENT_KEY } from "../constants";
 import { useStore } from "../store/useStore";
 import API from "../utils/API";
 import ChainDetails from "../components/ChainDetails";
 
+import Link from "next/link";
 
 export default function Home() {
   // const [add, setAdd] = useState([]);
@@ -19,9 +19,7 @@ export default function Home() {
 
   const fetchAllChains = async () => {
     let response = await API.get(`/chains/status/?&key=${COVALENT_KEY}`);
-    console.log("chainItems: ", response.data);
     let chainItems = response.data.data.items;
-    console.log("chainItems: ", chainItems);
     setChainItemsData(chainItems);
   };
 
@@ -48,7 +46,6 @@ export default function Home() {
   //     synced_blocked_signed_at: "2022-06-20T05:12:00Z",
   //   },
   // ];
-
 
   return (
     <div>
