@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
           <SideBar />
           <div className="flex flex-col w-screen">
             <Header />
-            <div className="w-auto">{children}</div>
+            <div className="w-auto self-center">{children}</div>
           </div>
         </div>
       </div>
