@@ -9,9 +9,9 @@ const CoinPriceChart = dynamic(
 
 export default function Chart() {
   return (
-    <div style={{ minHeight: "1000px" }}>
+    <main className="flex-col self-center">
       <h1>Coin Price Chart</h1>
-      {/* <CoinPriceChart /> */}
-    </div>
+      <CoinPriceChart />
+    </main>
   );
 }
