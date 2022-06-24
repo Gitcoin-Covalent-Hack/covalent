@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 import { AiOutlineAreaChart, AiOutlineHome, AiOutlinePieChart } from "react-icons/ai";
-import { BiLineChart, BiGasPump } from "react-icons/bi";
+import { BiLineChart, BiGasPump, BiCube } from "react-icons/bi";
 import { useEnsAvatar } from "wagmi";
 
 const routes = [
@@ -12,6 +12,7 @@ const routes = [
   { tabName: "Gas Guzzler", pageName: "/GasCalculator", icon: <BiGasPump /> },
   { tabName: "Analysis", pageName: "/Analysis", icon: <AiOutlinePieChart /> },
   { tabName: "Transcactions", pageName: "/Transcactions", icon: <BiLineChart /> },
+  { tabName: "Nfts", pageName: "/Nfts", icon: <BiCube /> },
 ];
 
 const SideBar = () => {
