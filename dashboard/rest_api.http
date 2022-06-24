@@ -1,9 +1,10 @@
 ### naim
-# @address = 0x813f45BD0B48a334A3cc06bCEf1c44AAd907b8c1
+@address = 0x813f45BD0B48a334A3cc06bCEf1c44AAd907b8c1
 ## demo.eth
 # @address = 0x3883f5e181fccaf8410fa61e12b59bad963fb645  
+# 0x34aA3F359A9D614239015126635CE7732c18fDF3
 
-@address = atg.eth  
+# @address = atg.eth  
 # @address = demo.eth  
 @chainId =1 
 
@@ -33,9 +34,14 @@ GET https://api.covalenthq.com/v1/chains/status/?&key={{covalentKey}}
 
 
 #### get transcactions
-GET https://api.covalenthq.com/v1/1/address/{{address}}/transactions_v2/?key={{covalentKey}}&page-size=10&page-number=2&no-logs=false
+GET https://api.covalenthq.com/v1/42/address/{{address}}/transactions_v2/?key={{covalentKey}}&page-size=10&page-number=2&no-logs=false
 
 
 
 ### get token holders for any block height
 GET https://api.covalenthq.com/v1/1/tokens/{{address}}/token_holders/?&key={{covalentKey}}&page-size=10&page-number=1
+
+
+
+#### COIN GEKO API
+GET https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd

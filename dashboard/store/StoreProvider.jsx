@@ -14,18 +14,18 @@ const Reducer = (state, action) => {
 
 const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, initialState);
+  const { data, isSuccess, isError } = useAccount();
 
   /**----------------------
    * NOTE: from dispatch send data as payload to override the state
-   * eg: dispatch({ payload: { address: "cool" } }
+   * eg: dispatch({ payload: { address: "0xasfasfs" } }
    * to access the state use   const [state, dispatch] = useStore(); in component
    * ---------------------*/
-  const { data, isSuccess } = useAccount();
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data !== null) {
       dispatch({ payload: { address: data.address } });
     }
-  }, [isSuccess]);
+  }, [isSuccess, data?.address]);
 
   return <StoreContext.Provider value={[state, dispatch]}>{children}</StoreContext.Provider>;
 };
