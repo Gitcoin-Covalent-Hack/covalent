@@ -10,11 +10,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider defaultTheme="light">
       <RainbowKitWrapper>
-        {/* <StoreProvider> */}
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-        {/* </StoreProvider> */}
+        <StoreProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </StoreProvider>
       </RainbowKitWrapper>
     </ThemeProvider>
   );
