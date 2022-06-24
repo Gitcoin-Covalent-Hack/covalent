@@ -1,14 +1,14 @@
-const NftCard = () => {
+const NftCard = ({name, description, image}) => {
     return(
-        <article class="bg-card w-80 p-6 rounded grid gap-y-6 text-base">
+        <article class="bg-card w-80 p-6 rounded grid gap-y-6 text-base mb-6">
         <header class="flex justify-center">
             <figure>
-                <img class="w-full" src="/images/image-equilibrium.jpg" alt="image-equilibrium" />
-                <figcaption class="mt-6 text-white text-2xl">Equilibrium #3429</figcaption>
+                <img class="w-full" src={image} alt="image-equilibrium" />
+                <figcaption class="mt-6 text-white text-2xl">{name}</figcaption>
             </figure>
         </header>
         <main class="grid gap-y-6">
-            <p class="text-secondary text-lg">Our Equilibrium collection promotes calm and balance.</p>
+            <p class="text-secondary text-lg">{description}</p>
             <div class="flex justify-between">
                 <p class="text-cyan flex gap-x-2 items-center">
                     <span>

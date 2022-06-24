@@ -6,7 +6,7 @@ import NftCard from "../components/NftCard";
 
 
 function Nfts() {
-  const [data, setData] = useState();
+  const [nfts, setNfts] = useState();
   
   const [loading, setLoading] = useState(false);
 
@@ -25,10 +25,10 @@ function Nfts() {
 
       const response_data = res.data.data.items;
       
-      const nft_data = response_data.filter(item => item.type === "nft");
-      setData(nft_data);
+      const nft_data = response_data.filter(item => item.type === "nft" && item.nft_data);
+      setNfts(nft_data);
       console.log(nft_data);
-      
+
       setLoading(false);
     } catch (e) {
       console.log(e);
@@ -36,10 +36,12 @@ function Nfts() {
     }
   };
 
-  const displayNfts = (nfts) => {
+  const displayNfts = () => {
     return nfts.map(nft => {
-        if(nft.nft_data){
-            return <NftCard />
+        if(nft.nft_data[0] && nft.nft_data[0].external_data){
+            const { name, description, image } = nft.nft_data[0].external_data;
+
+            return <NftCard name={name} description={description} image={image}/>
         }
     })
   };
@@ -52,7 +54,7 @@ function Nfts() {
     <div>
       {loading ? <p>Loading...</p> : ""}
       {
-        data ? displayNfts(data) : ""
+        nfts ? displayNfts() : ""
       }
     </div>
   );
@@ -60,30 +62,32 @@ function Nfts() {
 
 export default Nfts;
 
-const temp =             {
-    "token_id": "127",
-    "token_balance": "1",
-    "token_url": "ipfs://QmZFiD6tTTZRFMv4kumKuiqaHXbPBaQLVNs6nTGY74vZEG/0",
-    "supports_erc": [
-        "erc20",
-        "erc721"
-    ],
-    "token_price_wei": null,
-    "token_quote_rate_eth": null,
-    "original_owner": "0xb1898a42cfe1a82f9a8c363e48ce05394c64fe70",
-    "external_data": {
-        "name": null,
-        "description": null,
-        "image": null,
-        "image_256": null,
-        "image_512": null,
-        "image_1024": null,
-        "animation_url": null,
-        "external_url": "ipfs://QmZFiD6tTTZRFMv4kumKuiqaHXbPBaQLVNs6nTGY74vZEG/0",
-        "attributes": null,
-        "owner": null
-    },
-    "owner": "0xb1898a42cfe1a82f9a8c363e48ce05394c64fe70",
-    "owner_address": null,
-    "burned": null
-}
+const temp =             [
+    {
+        "token_id": "8987",
+        "token_balance": "1",
+        "token_url": "https://yieldguild.io/api/badge/8987",
+        "supports_erc": [
+            "erc20",
+            "erc721"
+        ],
+        "token_price_wei": null,
+        "token_quote_rate_eth": null,
+        "original_owner": "0xfc43f5f9dd45258b3aff31bdbe6561d97e8b71de",
+        "external_data": {
+            "name": "Yield Guild Badge #8987",
+            "description": "Your key into the metaverse",
+            "image": "https://storage.googleapis.com/ygg_images/badge.mp4",
+            "image_256": "https://image-proxy.svc.prod.covalenthq.com/cdn-cgi/image/width=256,fit/https://storage.googleapis.com/ygg_images/badge.mp4",
+            "image_512": "https://image-proxy.svc.prod.covalenthq.com/cdn-cgi/image/width=512,fit/https://storage.googleapis.com/ygg_images/badge.mp4",
+            "image_1024": "https://image-proxy.svc.prod.covalenthq.com/cdn-cgi/image/width=1024,fit/https://storage.googleapis.com/ygg_images/badge.mp4",
+            "animation_url": "https://storage.googleapis.com/ygg_images/badge.mp4",
+            "external_url": null,
+            "attributes": [],
+            "owner": null
+        },
+        "owner": "0xfc43f5f9dd45258b3aff31bdbe6561d97e8b71de",
+        "owner_address": null,
+        "burned": null
+    }
+]
