@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { baseUrl, fetchApi } from '../utils/fetchApi';
 import ReactEcharts from "echarts-for-react"; 
 
@@ -27,9 +28,9 @@ const TransactionsSankeyChart = ({ transactions } ) => {
   const transferNodes = uniqueNodes.filter(array => transferLinks.some(filter => filter.target === array.name || filter.source === array.name));
 
   const option = {
-    title: {
-      text: 'Transactions'
-    },
+    // title: {
+    //   text: 'Transactions'
+    // },
     tooltip: {
       trigger: 'item',
       triggerOn: 'mousemove'
@@ -64,14 +65,15 @@ const TransactionsSankeyChart = ({ transactions } ) => {
   }
 
   return (
-  <div> 
-      <ReactEcharts option={option} style={{height: '800px', width: '1500px'}}  onEvents={onEvents}/>
+  <div>
+    <ReactEcharts option={option} style={{height: '800px', width: '1500px'}}  onEvents={onEvents}/>
   </div>
   ) 
 }
 
-export async function getStaticProps() {
-  const transactions = await fetchApi(`${baseUrl}/v1/1/address/lscorpion.eth/transactions_v2/`);
+export async function getServerSideProps( context ) {
+  const address = context.query.address || 'vitalik.eth';
+  const transactions = await fetchApi(`${baseUrl}/v1/1/address/${address}/transactions_v2/`);
   return {
     props: {
       transactions: transactions?.items,

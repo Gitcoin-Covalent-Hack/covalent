@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@syncfusion/ej2-base": "^20.1.61",
     "axios": "^0.27.2",
     "babel-plugin-superjson-next": "^0.4.3",
     "dotenv": "^16.0.1",
