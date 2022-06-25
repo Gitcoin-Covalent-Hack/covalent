@@ -11,7 +11,7 @@
 @covalentKey = ckey_5e8a670491ce4380b6c994069e8
 
 #### GET BALANCES
-GET https://api.covalenthq.com/v1/1/address/{{address}}/balances_v2/?&key=ckey_5e8a670491ce4380b6c994069e8 HTTP/1.1
+GET https://api.covalenthq.com/v1/42/address/{{address}}/balances_v2/?&key=ckey_5e8a670491ce4380b6c994069e8 HTTP/1.1
 
 
 
