@@ -4,8 +4,6 @@ import { useStore } from "../store/useStore";
 import API from "../utils/API";
 import ChainDetails from "../components/ChainDetails";
 
-console.log(process.env.NEXT_PUBLIC_COVALENT_KEY)
-
 import Link from "next/link";
 
 export default function Home() {

@@ -3,6 +3,7 @@ import API from "../utils/API";
 import { useNetwork } from "wagmi";
 import { useStore } from "../store/useStore";
 import NftCard from "../components/NftCard";
+import Spinner from "../components/Spinner";
 
 
 function Nfts() {
@@ -19,7 +20,7 @@ function Nfts() {
   const fetchNftData = async () => {
     setLoading(true);
     try {
-        const addr =  state.searchedAddress || state.address || "demo.eth";
+        const addr =  state.searchedAddress || state.address;
       const res = await API.get(
         `https://api.covalenthq.com/v1/${activeChain.id}/address/${addr}/balances_v2/?nft=true&page-size=10&key=${process.env.NEXT_PUBLIC_COVALENT_KEY}`,
       );
@@ -39,10 +40,10 @@ function Nfts() {
 
   const displayNfts = () => {
     if(nfts && nfts.length == 0){
-        return <p>No Nft assets found!</p>
+        return "No Nft assets found!"
     }
     return nfts.map((nft, i) => {
-        if(nft.nft_data[0] && nft.nft_data[0].external_data){
+        if(nft.nft_data[0] && nft.nft_data[0].external_data && nft.nft_data[0].external_data.name){
             const { name, description, image, contract_ticker_symbol, balance } = nft.nft_data[0].external_data;
 
             return <NftCard key={i} name={name} description={description} image={image} symbol={contract_ticker_symbol} balance={balance}/>
@@ -57,7 +58,9 @@ function Nfts() {
   return (
     <div>
       {loading ? 
-        <p>Loading...</p> :
+        <div className="grid place-items-center items-center">
+            <Spinner />
+        </div> :
         <div className="nft-grid">
             {nfts ? displayNfts() : ""}
         </div>
