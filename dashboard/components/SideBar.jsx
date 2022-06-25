@@ -8,6 +8,7 @@ import { BiLineChart, BiGasPump, BiCube } from "react-icons/bi";
 import { useEnsAvatar } from "wagmi";
 
 import { useStore } from "../store/useStore";
+import { useTheme } from "next-themes";
 
 const routes = [
   { tabName: "Home", pageName: "/", icon: <AiOutlineHome /> },
@@ -22,6 +23,7 @@ const SideBar = () => {
   const { pathname } = useRouter();
   const [state, dispatch] = useStore();
 
+  const {theme, setTheme}  = useTheme();
   // handle address input
   const handleChange = (e) => {
     dispatch({ payload: { searchedAddress: e.target.value } });
@@ -67,7 +69,7 @@ const SideBar = () => {
               <React.Fragment key={tab.pageName}>
                 <Link href={tab.pageName}>
                   <a
-                    className={`flex items-center px-4 mt-2 py-2   rounded-md 
+                    className={`flex items-center px-4 mt-2 py-2   rounded-md ${theme !== "dark" ? "text-white" : ""}
                                 ${pathname === tab.pageName ? "bg-primary text-primary-content" : ""}
 		                          `}
                     href="#">
