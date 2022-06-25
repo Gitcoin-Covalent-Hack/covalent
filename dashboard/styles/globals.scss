@@ -46,3 +46,12 @@ a {
 .text-cyan {
   color: hsl(178, 100%, 50%);
 }
+
+.nft-grid {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  position: relative;
+}

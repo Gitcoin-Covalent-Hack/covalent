@@ -19,8 +19,9 @@ function Nfts() {
   const fetchNftData = async () => {
     setLoading(true);
     try {
+        const addr =  state.searchedAddress || state.address || "demo.eth";
       const res = await API.get(
-        `https://api.covalenthq.com/v1/${activeChain.id}/address/${state.searchedAddress || state.address}/balances_v2/?nft=true&page-size=10&key=${process.env.NEXT_PUBLIC_COVALENT_KEY}`,
+        `https://api.covalenthq.com/v1/${activeChain.id}/address/${addr}/balances_v2/?nft=true&page-size=10&key=${process.env.NEXT_PUBLIC_COVALENT_KEY}`,
       );
 
       const response_data = res.data.data.items;
@@ -37,24 +38,29 @@ function Nfts() {
   };
 
   const displayNfts = () => {
-    return nfts.map(nft => {
+    if(nfts && nfts.length == 0){
+        return <p>No Nft assets found!</p>
+    }
+    return nfts.map((nft, i) => {
         if(nft.nft_data[0] && nft.nft_data[0].external_data){
-            const { name, description, image } = nft.nft_data[0].external_data;
+            const { name, description, image, contract_ticker_symbol, balance } = nft.nft_data[0].external_data;
 
-            return <NftCard name={name} description={description} image={image}/>
+            return <NftCard key={i} name={name} description={description} image={image} symbol={contract_ticker_symbol} balance={balance}/>
         }
     })
   };
 
   useEffect(() => {
     fetchNftData();
-  },[]);
+  },[state, activeChain]);
 
   return (
     <div>
-      {loading ? <p>Loading...</p> : ""}
-      {
-        nfts ? displayNfts() : ""
+      {loading ? 
+        <p>Loading...</p> :
+        <div className="nft-grid">
+            {nfts ? displayNfts() : ""}
+        </div>
       }
     </div>
   );

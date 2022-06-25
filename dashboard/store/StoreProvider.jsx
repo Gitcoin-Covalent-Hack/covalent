@@ -23,7 +23,7 @@ const StoreProvider = ({ children }) => {
   const { data, isSuccess } = useAccount();
   useEffect(() => {
     if (isSuccess) {
-      dispatch({ payload: { address: data.address } });
+      dispatch({ payload: { address: data && data.address } });
     }
   }, [isSuccess]);
 
