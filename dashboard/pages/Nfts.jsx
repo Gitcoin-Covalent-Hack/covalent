@@ -6,6 +6,7 @@ import NftCard from "../components/NftCard";
 import Spinner from "../components/Spinner";
 import ErrorBanner from "../components/ErrorBanner";
 import InfoBanner from "../components/InfoBanner.";
+import AlertBanner from "../components/AlertBanner";
 
 
 function Nfts() {
@@ -14,6 +15,8 @@ function Nfts() {
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState("");
+
+  const [currentAddress, setCurrentAddress] = useState();
 
   const [state, dispatch] = useStore();
   console.log("state: ", state);
@@ -49,7 +52,9 @@ function Nfts() {
 
   const displayNfts = () => {
     if(nfts && nfts.length == 0){
-        return "No Nft assets found!"
+        return (
+            <AlertBanner message={`No Nfts found for address ${currentAddress}`}/>
+        )
     }
     return nfts.map((nft, i) => {
         if(nft.nft_data[0] && nft.nft_data[0].external_data && nft.nft_data[0].external_data.name){
@@ -63,7 +68,11 @@ function Nfts() {
   useEffect(() => {
     setNfts(null);
     state.searchedAddress && fetchNftData();
-  },[state, activeChain]);
+  },[currentAddress, activeChain]);
+
+  useEffect(() => {
+    setCurrentAddress(state.searchedAddress);
+  }, [state]);
 
   if(error){
     return <ErrorBanner error={error}/>
