@@ -4,12 +4,16 @@ import { useNetwork } from "wagmi";
 import { useStore } from "../store/useStore";
 import NftCard from "../components/NftCard";
 import Spinner from "../components/Spinner";
+import ErrorBanner from "../components/ErrorBanner";
+import InfoBanner from "../components/InfoBanner.";
 
 
 function Nfts() {
   const [nfts, setNfts] = useState();
   
   const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState("");
 
   const [state, dispatch] = useStore();
   console.log("state: ", state);
@@ -18,23 +22,28 @@ function Nfts() {
   console.log(activeChain);
 
   const fetchNftData = async () => {
+    setError("");
     setLoading(true);
     try {
-        const addr =  state.searchedAddress || state.address;
-      const res = await API.get(
-        `https://api.covalenthq.com/v1/${activeChain.id}/address/${addr}/balances_v2/?nft=true&page-size=10&key=${process.env.NEXT_PUBLIC_COVALENT_KEY}`,
-      );
+        const addr =  state.searchedAddress;
+        const res = await API.get(
+            `https://api.covalenthq.com/v1/${activeChain.id}/address/${addr}/balances_v2/?nft=true&key=${process.env.NEXT_PUBLIC_COVALENT_KEY}`,
+        );
 
-      const response_data = res.data.data.items;
+        console.log(res)
+
+        const response_data = res.data.data.items;
       
-      const nft_data = response_data.filter(item => item.type === "nft" && item.nft_data);
-      setNfts(nft_data);
-      console.log(nft_data);
-
-      setLoading(false);
+        const nft_data = response_data.filter(item => item.type === "nft" && item.nft_data);
+        setNfts(nft_data);
+        console.log(nft_data);
+        setLoading(false);
     } catch (e) {
-      console.log(e);
-      setLoading(false);
+        const message = e.response.data.error_message || e.message;
+        setError({message: message})
+
+        console.log(e);
+        setLoading(false);
     }
   };
 
@@ -52,11 +61,20 @@ function Nfts() {
   };
 
   useEffect(() => {
-    fetchNftData();
+    setNfts(null);
+    state.searchedAddress && fetchNftData();
   },[state, activeChain]);
+
+  if(error){
+    return <ErrorBanner error={error}/>
+  }
 
   return (
     <div>
+        {
+            !state.searchedAddress ? 
+            <InfoBanner info={"Enter address in search-bar to view Nfts"}/> : ""
+        }
       {loading ? 
         <div className="grid place-items-center items-center">
             <Spinner />
@@ -70,33 +88,3 @@ function Nfts() {
 }
 
 export default Nfts;
-
-const temp =             [
-    {
-        "token_id": "8987",
-        "token_balance": "1",
-        "token_url": "https://yieldguild.io/api/badge/8987",
-        "supports_erc": [
-            "erc20",
-            "erc721"
-        ],
-        "token_price_wei": null,
-        "token_quote_rate_eth": null,
-        "original_owner": "0xfc43f5f9dd45258b3aff31bdbe6561d97e8b71de",
-        "external_data": {
-            "name": "Yield Guild Badge #8987",
-            "description": "Your key into the metaverse",
-            "image": "https://storage.googleapis.com/ygg_images/badge.mp4",
-            "image_256": "https://image-proxy.svc.prod.covalenthq.com/cdn-cgi/image/width=256,fit/https://storage.googleapis.com/ygg_images/badge.mp4",
-            "image_512": "https://image-proxy.svc.prod.covalenthq.com/cdn-cgi/image/width=512,fit/https://storage.googleapis.com/ygg_images/badge.mp4",
-            "image_1024": "https://image-proxy.svc.prod.covalenthq.com/cdn-cgi/image/width=1024,fit/https://storage.googleapis.com/ygg_images/badge.mp4",
-            "animation_url": "https://storage.googleapis.com/ygg_images/badge.mp4",
-            "external_url": null,
-            "attributes": [],
-            "owner": null
-        },
-        "owner": "0xfc43f5f9dd45258b3aff31bdbe6561d97e8b71de",
-        "owner_address": null,
-        "burned": null
-    }
-]

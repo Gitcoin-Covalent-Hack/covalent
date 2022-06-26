@@ -23,7 +23,7 @@ const NftCard = ({name, description, image, symbol, balance}) => {
     }
 
     return(
-        <div className="bg-base-100 rounded grid shadow text-base mb-6">
+        <div className="bg-base-100 rounded grid shadow text-base mb-6 max-w-lg">
             <div className="h-60">
                 {imgOrVideo(image)}
             </div>
