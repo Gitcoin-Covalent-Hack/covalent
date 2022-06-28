@@ -1,8 +1,9 @@
+import { ethers } from "ethers";
 import moment from "moment";
 import Image from "next/image";
 
 import React from "react";
-import { useNetwork } from "wagmi";
+import { allChains, useNetwork } from "wagmi";
 
 const ChainDetails = ({ chainItems }) => {
   const { switchNetwork, chains, activeChain } = useNetwork();
@@ -13,7 +14,7 @@ const ChainDetails = ({ chainItems }) => {
           // .filter((item) => item.is_testnet == false)
           .filter((item) => {
             // filtering rainbowkit default supported networks
-            let data = chains.find((chainData) => chainData.id === Number(item.chain_id));
+            let data = allChains.find((chainData) => chainData.id === Number(item.chain_id));
             return data !== undefined;
           })
           .map((item) => (
@@ -36,16 +37,18 @@ const ChainDetails = ({ chainItems }) => {
                           {item.name.split("-").join(" ")}
                         </h6>
                         {/* connected network */}
-                        {activeChain.id === +item.chain_id && (
+                        {activeChain && activeChain.id === +item.chain_id && (
                           <button className="badge badge-lg border-none bg-green-100 text-green-500">connected</button>
                         )}
 
                         {/* not active connection */}
-                        {activeChain.id !== +item.chain_id && (
+                        {(activeChain && activeChain.id !== +item.chain_id) && (
                           <button
                             className="badge badge-lg border-none bg-blue-100 text-blue-500"
-                            onClick={() => {
-                              switchNetwork(+item.chain_id);
+                            onClick={async () => {
+                              if (switchNetwork) {
+                                switchNetwork(+item.chain_id);
+                              }
                             }}>
                             connect
                           </button>
