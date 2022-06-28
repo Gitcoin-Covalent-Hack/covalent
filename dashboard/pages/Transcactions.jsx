@@ -45,7 +45,8 @@ export default function TranscactionsPage() {
       setIsLoading(true);
       // console.log("load tx data for  ", address, chainId);
       let response = await API.get(
-        `https://api.covalenthq.com/v1/${chainId}/address/${address}/transactions_v2/?key=${COVALENT_KEY}&page-size=${pageSize}&page-number=${pageNumber}&no-logs=false`
+        // `https://api.covalenthq.com/v1/${chainId}/address/${address}/transactions_v2/?key=${COVALENT_KEY}&page-size=${pageSize}&page-number=${pageNumber}&no-logs=false`
+        `/${chainId}/address/${address}/transactions_v2/?key=${COVALENT_KEY}&page-size=${pageSize}&page-number=${pageNumber}&no-logs=false`
       );
 
       let txItems = response.data.data.items;

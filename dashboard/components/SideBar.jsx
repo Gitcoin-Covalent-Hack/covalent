@@ -16,6 +16,7 @@ export const routes = [
   { tabName: "Gas Guzzler", pageName: "/GasCalculator", icon: <BiGasPump /> },
   { tabName: "Analysis", pageName: "/Analysis", icon: <AiOutlinePieChart /> },
   { tabName: "Transcactions", pageName: "/Transcactions", icon: <BiLineChart /> },
+  { tabName: "Sankey Chart", pageName: "/SankeyChart", icon: <BiLineChart /> },
 ];
 
 const SideBar = () => {
