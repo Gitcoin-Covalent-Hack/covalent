@@ -1,7 +1,8 @@
-import { Chain, chain } from "wagmi";
+import { chain } from "wagmi";
 
-// define your target names in root .env file inside NEXT_PUBLIC_TARGET_NETWORKS variable
-const TARGATED_CHAINS = [...process.env.NEXT_PUBLIC_TARGET_NETWORKS.split(",")];
+// add your target  network names
+// const TARGATED_CHAINS = ["hardhat", "rinkeby", "mainnet"];
+const TARGATED_CHAINS = [...Object.keys(chain)];
 
 export const targetNetowrks = (requiredChains) => {
   const targetedChains = [];
