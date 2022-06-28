@@ -144,6 +144,7 @@ const SankeyChart = ({}) => {
             // key={chartOption.series.type}
             option={chartOption}
             // style={{ height: "800px", width: "1500px" }}
+            style={{ height: "90vh" }}
             onEvents={onEvents}
           />
         </div>
